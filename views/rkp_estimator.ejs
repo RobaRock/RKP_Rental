@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <div>
+        <%- include('./partials/nav.ejs') %>
+        <hr class="hr" />
+        <div class="container">
+            <form class="name estimatorform">
+                <div class="row justify-content-center gap-5">
+                    <div class="col-md-6 ">
+                        
+                        <label for="bedroom" class="form-label">
+                            Number of Bed room(s):
+                        </label>
+                        <div class="mb-4 input-group">
+                            <input type="number" class="bedroom form-control border-primary" id="bedroom"
+                                placeholder="e.g 3 bedroom" name="bhk" required>
+                        </div>
+                        <label for="bathroom" class="form-label">
+                            Number of Bath room(s):
+                        </label>
+                        <div class="mb-4 input-group">
+                            <input type="number" class="bathroom form-control border-primary" id="bathroom"
+                                placeholder="e.g 1 bathroom" name="bath" required>
+                        </div>
+                        <label for="location" class="form-label">
+                            Location:
+                        </label>
+                        <div class="mb-4 input-group">                            
+                             <input type="number" class="location form-control border-primary" id="location"
+                                placeholder="e.g kebele 16, yetebaberut glbach" name="location" required>
+                        </div>
+                        <label for="sqrt" class="form-label">
+                            sqft:
+                        </label>
+                        <div class="mb-4 input-group">
+                            <input type="number" class="sqrt form-control border-primary" id="sqrt"
+                                placeholder="e.g 200sqrt" name="sqft" required>
+                        </div>
+                        <div class="price mb-3" style="font-size: 30; "></div>
+                        <div class="mb-3" style="text-align: center;">
+                            <div class="mt-4 text-start">
+                                <button class="btn btn-outline-danger text-center" type="submit"> Calculate</button>
+                            </div>
+
+                        </div>
+                    </div>
+                  
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <%- include('./partials/foot.ejs') %>
+</body>
+<script>
+     const estimatorform = document.querySelector('form.name.estimatorform');
+     const price = document.querySelector('.price');
+
+     estimatorform.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        price.textContent = '';
+
+        //getting values from the form
+        const location = estimatorform.location.value;
+        const bath = estimatorform.bath.value;
+        const bhk = estimatorform.bhk.value;
+        const sqft = estimatorform.sqft.value;
+
+         // try to estimate
+         try {
+        const res = await fetch('/rkp_estimator', { 
+        method: 'POST', 
+        body: JSON.stringify({ location, bath , bhk, sqft }),
+        headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        const pricee = data.estimated_price +" ETB"
+        price.textContent = pricee;
+             }
+        catch (err) {
+            console.log(err);
+        }
+     })
+</script>
+</html>

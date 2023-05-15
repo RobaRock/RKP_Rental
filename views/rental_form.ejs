@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <div id="fh5co-wrapper">
+    <div id="fh5co-page">
+    <div class="bg-light">
+        <%- include('./partials/nav.ejs') %>
+        <hr class="hr" />
+
+        <!-- body part-->
+        <div class="container-lg">
+            <!-- <div class="justify-content-center"> -->
+                <div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                  </div>
+
+
+                  <form id="" class="name add_rental" enctype="multipart/form-data" >
+                    <div class="row justify-content-center gap-5">
+                        <div class="col-md-4 ">
+                            <label for="name" class="form-label">
+                                Name:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person"> </i>
+                                </span>
+                                <input type="text" class="name form-control border-primary" id="name" name="name"
+                                    placeholder="e.g robel asfaw" required>
+                            </div>
+                            <label for="phonenumber" class="form-label">
+                                Phone Number:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-phone-fill"></i>
+                                </span>
+                                <input type="number" class="phonenumber form-control border-primary" id="phonenumber"
+                                    placeholder="e.g +251935******" name="phonenumber" required>
+                            </div>
+                            <label for="price" class="form-label">
+                                Price:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-currency-dollar"></i>
+                                </span>
+                                <input type="number" class="price form-control border-primary" id="price"
+                                    placeholder="e.g 5500 in ETB" name="price" required>
+                            </div>
+                            <label for="bedroom" class="form-label">
+                                Number of Bed room(s):
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <img src="/bed.jpg" width="20" height="20" alt="">
+                                </span>
+                                <input type="number" class="bedroom form-control border-primary" id="bedroom"
+                                    placeholder="e.g 3 bedroom" name="bedroom" required>
+                            </div>
+                            <label for="bathroom" class="form-label">
+                                Number of Bath room(s):
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <img src="/bath.jpg" width="20" height="20" alt="">
+                                </span>
+                                <input type="number" class="bathroom form-control border-primary" id="bathroom"
+                                    placeholder="e.g 1 bathroom" name="bathroom" required>
+                            </div>
+                            <label for="location" class="form-label">
+                                Location:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </span>
+                                
+                                 <input type="text" class="location form-control border-primary" id="location"
+                                    placeholder="e.g kebele 16, yetebaberut glbach" name="location" required>
+                            </div>
+                            <label for="sqrt" class="form-label">
+                                sqrt:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <img src="/sqrt.jpg" width="20" height="20" alt="">
+                                </span>
+                                <input type="number" class="sqrt form-control border-primary" id="sqrt"
+                                    placeholder="e.g 200sqrt" name="sqrt" required>
+                            </div>
+                            <label for="addtionalfeature" class="form-label">
+                                Addtional Feature:
+                            </label>
+                           
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-clipboard2-plus"></i>
+                                </span>
+                                <input type="text" class="additionalfeature form-control border-primary" id="addtionalfeature"
+                                    placeholder="e.g have swimming pool and garden" name="additionalfeature" required>
+                            </div>
+                            <label for="samplephotos" class="form-label">
+                                Sample Photos:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-file-image"></i>
+                                </span>
+                                <input type="file" class="pic1 form-control file-upload-image"  name="pic1" id="pic1" 
+                                    accept="Image/*" required>
+                            </div>
+                            <div class="pic1 error text-danger"></div>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-file-image"></i>
+                                </span>
+                                <input type="file" class="pic2 form-control file-upload-image" onchange="readURL(this)" id="pic2" name="pic2"
+                                    accept="Image/*" required>
+                            </div>
+                            <div class="pic2 error text-danger"></div>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-file-image"></i>
+                                </span>
+                                <input type="file" class="pic3 form-control file-upload-image" onchange="readURL(this)" id="pic3" name="pic3"
+                                    accept="Image/*" required>
+                            </div>
+                            <div class="pic3 error text-danger"></div>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-file-image"></i>
+                                </span>
+                                <input type="file" class="pic4 form-control file-upload-image" onchange="readURL(this)" id="pic4" name="pic4"
+                                    accept="Image/*" required>
+                            </div>
+                            <div class="pic4 error text-danger"></div>
+                            <input type="text" class="lat" hidden name="lat" value="" id="lat" >
+                            <input type="text" class="lat" hidden name="lng" value="" id="lng" >
+
+                            
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-file-image"></i>
+                                </span>
+                                <input type="file" class="vedio" onchange="readURL(this)" id="vedio" name="vedio" >
+                            </div>
+                                <!-- <div class="mb-4 input-group">
+                                    <label for="file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; white-space: nowrap; vertical-align: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;" onmouseover="this.style.borderColor='#aaa'; document.querySelector('.fa-cloud-upload').style.color='#fff';" onmouseout="this.style.borderColor='#ccc'; document.querySelector('.fa-cloud-upload').style.color='inherit';">
+                                        <i class="fa fa-cloud-upload" style="margin-right: 5px;"></i> Upload a Vedio
+                                      </label>
+                                      <input type="file" class="vedio" id="file-upload" name="vedio" style="display: none;">
+                                      
+                                </div> -->
+
+                             <!--creat a dropdown button for property type-->
+                        
+                            <div class="property_type" >
+                             <section>
+                                <label >Property type:</label>
+                                <div >
+                                    <select name="type" id="price_min"  style="color: black;" class="property cs-select cs-select-half cs-skin-border input-half">
+                                        <option  value="rent" style="color: black;" >Rent</option>
+                                        <option value="sell" style="color: black;">Sell</option> 
+                                    </select>
+                                </div>
+                            </section>
+                            </div>
+                            <div class="mb-4">
+
+                            </div>
+                        
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-start">
+                                        <button class="btn btn-outline-danger" type="reset"> reset</button>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <button class="btn btn-outline-primary" type="submit"> submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map col-md-6 " id="mapid">
+                                
+                        </div>
+                    </div>
+                </form>
+            <!-- </div> -->
+        </div>
+
+        <hr class="hr" />
+        <%- include('./partials/foot.ejs') %>
+    </div>
+</div>
+<!-- END fh5co-page -->
+
+</div>
+<!-- END fh5co-wrapper -->
+
+<!-- jQuery -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
+    
+    <script>
+          const add_rentalform = document.querySelector('form.name.add_rental');
+          const loading = document.querySelector('.sk-circle');
+          const pic1error = document.querySelector('.pic1.error');
+          const pic2error = document.querySelector('.pic2.error');
+          const pic3error = document.querySelector('.pic3.error');
+          const pic4error = document.querySelector('.pic4.error');
+
+          loading.style.display = "none"
+          add_rentalform.style.display = "block"
+
+          add_rentalform.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    loading.style.display = "block"
+                    add_rentalform.style.display = "none"
+            pic1error.textContent = '';
+            pic2error.textContent = '';
+            pic3error.textContent = '';
+            pic4error.textContent = '';
+
+                    const formData = new FormData(add_rentalform);
+
+                    fetch("/check_photoes", {
+                        method: "POST",
+                        body: formData,
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            loading.style.display = "none"
+                            add_rentalform.style.display = "block"
+                        if(data.prediction1 === "not_home"){
+                            pic1error.textContent = 'the system not get a house image, please insert again'
+                         
+                        }
+                        if(data.prediction2 === "not_home"){
+                            pic2error.textContent = 'the system not get a house image, please insert again'
+                         
+                        }
+                        if(data.prediction3 === "not_home"){
+                            pic3error.textContent = 'the system not get a house image, please insert again'
+                           
+                        }
+                        if(data.prediction4 === "not_home"){
+                            pic4error.textContent = 'the system not get a house image, please insert again'
+                            
+                        }
+                        if(Array.isArray(data.duplication)){
+                            alert(`please void duplication, the system detect duplication on image ${data.duplication[0]} and ${data.duplication[1]} `)
+                        }
+                        if(data.videoStatus === "invalid"){
+                            alert('please provide correct video')
+                        }
+                        })
+                        .catch((error) => {
+                        console.error(error);
+                        });
+                    });
+    </script>
+    
+    <script>
+         var click_marker ;
+         const addRentalForm = document.querySelector('form.add_rental');
+         const lat_ = document.querySelector('.lat');
+         const lng_ = document.querySelector('.lng');
+         var lat = addRentalForm.lat;
+         var lng = addRentalForm.lng;
+
+             
+        var map = L.map('mapid').setView([11.5846,37.3839], 15);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+         }).addTo(map);
+
+           
+            
+         //map on click
+         map.on('click', function(e){
+            if(click_marker){
+                map.removeLayer(click_marker);
+            }
+            click_marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+            lat.value = e.latlng.lat;
+            lng.value = e.latlng.lng;
+            
+         })
+    </script>
+    
+   <script src="js/jquery.min.js"></script>
+   <!-- jQuery Easing -->
+   <script src="js/jquery.easing.1.3.js"></script>
+   <!-- Bootstrap -->
+   <script src="js/bootstrap.min.js"></script>
+   <!-- Waypoints -->
+   <script src="js/jquery.waypoints.min.js"></script>
+   <script src="js/sticky.js"></script>
+   <!-- Superfish -->
+   <script src="js/hoverIntent.js"></script>
+   <script src="js/superfish.js"></script>
+   <!-- Flexslider -->
+   <script src="js/jquery.flexslider-min.js"></script>
+   <!-- Date Picker -->
+   <script src="js/bootstrap-datepicker.min.js"></script>
+   <!-- CS Select -->
+   <script src="js/classie.js"></script>
+   <script src="js/selectFx.js"></script>
+
+   
+   <!-- Main JS -->
+   <script src="js/main.js"></script>
+    
+</body>
+</html>

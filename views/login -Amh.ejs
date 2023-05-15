@@ -1,0 +1,263 @@
+<!--Modals for log in-->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title h3" id="modal-title">
+                    Welcome to RKP
+                </h1>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-lg my-1">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-sign-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign"
+                                aria-selected="true">
+                                Sign in
+                            </button>
+                            <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-register" type="button" role="tab"
+                                aria-controls="nav-register" aria-selected="true">
+                                Register
+                            </button>
+                        </div>
+                        <div class="tab-content" id="navsign">
+                            <div class="tab-pane fade show active p-3" id="nav-sign" role="tabpanel"
+                                aria-labelledby="nav-sign-tab">
+                                <div class="row justify-content-center my-1">
+                                    <div class="cols-lg-6">
+                                        <form class="name loginform">
+                                            <label for="email" class="form-label">
+                                                Email:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-envelope"></i>
+                                                </span>
+                                                <input type="email" class="form-control border-primary"
+                                                    id="loginemail" name="loginemail" placeholder="e.g robel@gmail.com" required>
+                                            </div>
+                                            <div class="loginemail error text-danger"></div>
+                                            <label for="password" class="form-label">
+                                                Password:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-lock-fill"></i>
+                                                </span>
+                                                <input type="password" class="form-control border-primary"
+                                                    id="loginpassword" name="loginpassword" placeholder="Enter password" required>
+                                            </div>
+                                            <div class="loginpassword error text-danger"></div>
+                                            <div class="text-center mt-4 mb-2">
+                                                <button class="btn btn-primary">
+                                                    Log in
+                                                </button>
+
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="text-primary"><a href="#"> Forgot your password?
+                                                    </a></span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-content" id="navregister">
+                            <div class="tab-pane fade active p-3" id="nav-register" role="tabpanel"
+                                aria-labelledby="nav-register-tab">
+                                <div class="row justify-content-center my-1">
+                                    <div class="cols-lg-6">
+                                        <form  class="name signupform">
+                                            <label for="name" class="form-label">
+                                                Name:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-person"> </i>
+                                                </span>
+                                                <input type="text" class="form-control border-primary" id="name"
+                                                    placeholder="e.g robel asfaw" name="name" required >
+                                            </div>
+                                            <div class="name error text-danger"></div>
+
+                                            <label for="phonenumber" class="form-label">
+                                                Phone Number:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-phone-fill"></i>
+                                                </span>
+                                                <input type="number" class="form-control border-primary"
+                                                    id="phonenumber" placeholder="0935******" name="phonenumber" required >
+                                            </div>
+                                            <div class="phonenumber error text-danger"></div>
+                                            <label for="email" class="form-label ">
+                                                Email:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-envelope"></i>
+                                                </span>
+                                                <input type="email" class="form-control border-primary"
+                                                    id="email" placeholder="e.g robel@gmail.com" name="email" required >
+                                            </div>
+                                            <div class="email error text-danger"></div>
+                                            <label for="password" class="form-label" >
+                                                Password:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-lock-fill"></i>
+                                                </span>
+                                                <input type="password" class="form-control border-primary"
+                                                     placeholder="Create password" name="password" id="password" required>
+                                            </div>
+                                            <div class="password error text-danger"></div>
+                                            <label for="confirm" class="form-label ">
+                                                Confirm Password:
+                                            </label>
+                                            <div class="mb-4 input-group">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-lock-fill"></i>
+                                                </span>
+                                                <input type="password" class="form-control border-primary"
+                                                     placeholder="enter your password again" name="confirm" id="confirm" required>
+                                            </div>
+                                            <div class="confirm error text-danger"></div>
+                                            <div class="form-check text-center mb-3">
+                                                <input type="checkbox" class="form-check-label border-primary"
+                                                    for="landlord" name="landlord" id="landlord">
+                                                <label for="landlord" class="form-check-label">
+                                                    I am a rental
+                                                </label>
+                                            </div>
+
+                                            <div class="text-center mt-4 mb-2">
+                                                <button  class="btn btn-primary">
+                                                    register
+                                                </button>
+
+                                            </div>
+                                            <div class="text-center mb-2">
+                                                <span class="text-dark">By submitting, I accept RKP's<a
+                                                        href="#"> terms of use. </a></span>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+     //intializing for log_in page
+     const loginform = document.querySelector('form.name.loginform');
+     const loginemailError = document.querySelector('.loginemail.error');
+     const loginpasswordError = document.querySelector('.loginpassword.error');   
+
+    // intializing for sign_up page
+    const form = document.querySelector('form.name.signupform');
+    const nameError = document.querySelector('.name.error');
+    const phonenumberError = document.querySelector('.phonenumber.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const confirmError = document.querySelector('.confirm.error');
+
+    //login_handler
+    loginform.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+
+        //reset errors
+        loginemailError.textContent = '';
+        loginpasswordError.textContent = '';
+
+        // getting values
+        const email = loginform.loginemail.value;
+        const password = loginform.loginpassword.value;
+
+        // try the user login
+        try {
+        const res = await fetch('/log_in', { 
+        method: 'POST', 
+        body: JSON.stringify({ email, password }),
+        headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+            loginemailError.textContent = data.errors.email;
+            loginpasswordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+        location.assign('/');
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+    })
+
+    // sign_up handler 
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const landlordd =  false;
+        if(form.landlord.value.checked == true){
+            landlordd  = "true";
+        }
+        else if(form.landlord.value.checked == false){
+            landlordd  =  "false";
+        }
+
+
+    // reset errors
+    nameError.textContent = '';
+    phonenumberError.textContent = '';
+    emailError.textContent = '';
+    passwordError.textContent = '';
+    confirmError.textContent = '';
+
+    // get values
+    const name = form.name.value;
+    const phonenumber = form.phonenumber.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    //   const landlord = form.landlord.value;
+
+    try {
+        const res = await fetch('/sign_up', { 
+        method: 'POST', 
+        body: JSON.stringify({ name,phonenumber,email, password, confirm, landlordd }),
+        headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+        nameError.textContent = data.errors.name;
+        phonenumberError.textContent = data.errors.phonenumber;
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+        confirmError.textContent = data.errors.confirm;
+        }
+        if (data.user) {
+        location.assign('/');
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    });
+</script>

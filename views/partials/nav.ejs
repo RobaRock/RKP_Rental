@@ -1,0 +1,104 @@
+<header id="fh5co-header-section" class="sticky-banner">
+       <div class="container">
+        <div class="nav-header">
+            <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+            <h1 id="fh5co-logo"><a href="/"><i class="icon-home"></i>RKP<span>rental</span></a></h1>
+            <!-- START #fh5co-menu-wrap -->
+            <%if(user){%>
+            <nav id="fh5co-menu-wrap" role="navigation">
+                <ul class="sf-menu" id="fh5co-primary-menu">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li>
+                        <a  class="fh5co-sub-ddown">RKP AI tools</a>
+                        <ul class="fh5co-sub-menu">
+                            <li><a href="/voice_assistance">RKP voice assistance</a></li>
+                            <li><a href="/rkp_chat_bot">RKP AI ChatBot</a></li>
+                            <li><a href="/rkp_estimator">RKP AI Estimate</a></li>
+                        </ul>
+
+                    </li>
+                   
+                    <li><a href="/rental_form">Owner form</a></li>
+                    <li><a href="/available_homes">see houses </a></li>
+                    <li><a href="/chatbox">Chat</a></li>
+                    <li><a href="/saved-homes"><i class="bi bi-cart postion-relative"  style="font-size: 2rem; color: crimson;"> 
+                        <% if(typeof displayer === 'undefined'){ %>
+                            <span class=" small position-absolute top-0 start-50" id="cart_value" style="font-size: 1.5rem; color: crimson;"> 
+                                0
+                             </span>
+                        
+                            <% } else{%>
+                                <span class=" small position-absolute top-0 start-50" id="cart_value" style="font-size: 1.5rem; color: crimson;"> 
+                                    <%= displayer%>
+                                </span>
+                                <% } %>
+                         
+                                                </i>
+                    </a> </li> 
+                    <% if(typeof displayer === 'undefined'){ %>
+                        <input type="text" class="value cart" size="1" value="0" hidden> 
+                        <%}else{  %>
+                            <input type="text" class="value cart" size="1" value="<%= displayer%>" hidden> 
+                        <%}  %>
+                    
+    
+                    <%
+                    if(1<2){
+                        const amh = 'amharic';
+                        const eng = 'english';
+                    %>
+                    <li>
+                        <a  class="fh5co-sub-ddown">Language</a>
+                        <ul class="fh5co-sub-menu">
+                            <li><a href="/language_preference/<%=amh%>">Amharic <picture></picture></a></li>
+                            <li><a href="/language_preference/<%=eng%>">English</a></li>
+                        
+                        </ul>
+                    </li>
+                    <%}%>
+                    
+                    <li>
+                        <%
+                    if(!(naveprofile==='')){
+                    %>
+                   <a > <img src="/profile_picture/<%=naveprofile%>" class="rounded-circle" style="width: 35px;"
+                            alt="Avatar" /> </a>
+                            <ul class="fh5co-sub-menu">
+                            <li><a href="/profile/<%= user._id %>">Profile <picture></picture></a></li>
+                            <li><a href="/posts/<%= user._id %>">Post</a></li>
+                            <li><a href="/log_out">log out</a></li>
+                            
+                        </ul>
+                        
+                    <%} else{      
+                        %>
+                        <a ><img src="/random_person.jpg" class="rounded-circle" style="width: 35px;"
+                                alt="Avatar" /></a>
+                                <ul class="fh5co-sub-menu">
+                            <li><a href="/profile/<%= user._id %>">profile <picture></picture></a></li>
+                            <li><a href="/posts/<%= user._id %>">Post</a></li>
+                            <li><a href="/log_out">log out</a></li>
+                            
+                        </ul>
+                  
+                    <% }%>  
+                    </li>
+                </ul>
+            </nav>
+            <%} else{%>  
+                
+                <ul class="sf-menu" id="fh5co-primary-menu">
+                    <li class="active"><a href="/">Home</a></li><li>
+                    <li><a href="/available_homes">see houses </a></li>
+                    <li><a href="/log_in">Sign in</a></li>
+                </ul>
+                    </ul>
+                    
+                <%}%>
+    </div>
+   </div> 
+</header>
+<script>
+        var cartNumber;
+        cartNumber = document.querySelector(".value.cart").value;
+</script>

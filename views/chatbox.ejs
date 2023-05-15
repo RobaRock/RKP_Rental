@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <div>
+        <%- include('./partials/nav.ejs') %>
+        <hr class="hr" />
+        <div class="row ms-1 ">
+     
+                <div class="col-3">
+                    <% for(let i=0; i< mychat.length ; i++){
+                        for(let j = 0 ; j< au.length; j++)
+                       {
+                        if(mychat[i].seller_uid === au[j].id){  
+                           
+                        %>
+                        <% if(!(user.id === mychat[i].seller_uid)) {
+                            
+                            %>
+                            
+                        <form class="seller_id_form" name="seller_id_form" action="/chatbox/<%= mychat[i].seller_uid %>" method="get">
+                         <%} else {%>
+                            <form class="seller_id_form" name="seller_id_form" action="/chatbox/<%= mychat[i].self_uid %>" method="get">    
+                           <% } %> 
+                            <!-- <span> <input class="seller_id_input" type="text" value="<%=mychat[i].seller_uid%>" name="seller_id" hidden> </span> -->
+                            <%if(mychat[i].self_uid === user.id){%>
+                           
+                            <button  style="width: 100%;" class="text-start button-solid-chatbox">
+                                <div class="chatbox">
+                                    <div class="justify-content-center justify-content-lg-end" id="log_in_person">
+                                        <img src="/profile_picture/<%= au[j].profilepicture %>" class="rounded-circle" style="width: 35px;"
+                                            alt="Avatar" /> 
+                                            <span class="px-1"><%= mychat[i].seller_name %></span>  
+                                    </div>
+                                </div>
+                            </button>
+                            <%} else {
+                                %>
+                                <%
+                                
+                                for (let j = 0 ; j< au.length; j++){
+                                    if(mychat[i].self_uid === au[j].id)
+                                    {
+                                        
+                                    %>
+                                <button  style="width: 100%;" class="text-start button-solid-chatbox">
+                                    <div class="chatbox">
+                                        <div class="justify-content-center justify-content-lg-end" id="log_in_person">
+                                            <img src="/profile_picture/<%= au[j].profilepicture %>" class="rounded-circle" style="width: 35px;"
+                                                alt="Avatar" /> 
+                                                <span class="px-1"><%= au[j].name %></span>  
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <%}}}%>
+                        </form>
+                       
+                        <hr class="hr" />
+                            
+                    <%
+                break;
+                }}}%>
+                        </div>
+
+    
+            <!-- <div class="vertical_line">
+            </div> -->
+            <!-- dynamic data will be inserted-->
+
+              <% if(!(conversation.length === 0)) {
+                %>
+                <div class="col-9">
+                <%for(let i = 0; i< conversation.length; i++ ){
+                %>
+                    <% if(user.id === conversation[i].self_uid){ %>
+                    <div class="ql-container text-start ">
+                        <p class="owner"> <%= conversation[i].main_message %>
+                        </p>
+                    </div>
+                    <%
+                continue;
+                } else{%>
+                    <div class="ql-container text-end">
+                        <p class="abroad"> <%= conversation[i].main_message %>
+                        </p>
+                    </div>
+                    <%
+                   continue;
+                }%>
+              <%}%>
+           
+              <div>
+                <form class="chatform" name="chatform" role="search">
+                    <span> <input class="chatform_main_message" name="main_message" type="text" size="70px" placeholder="write a message ..."> </span> 
+                     <span><button class="chat_send btn btn-outline-primary"><i class="bi bi-send fa-1x text-dark"></i></button> </span>
+                     
+                            <% if(conversation[0].seller_uid === user.id){
+                                let s_uid = conversation[0].self_uid;
+                              %> 
+                              <% for(let i =0; i< au.length ; i++){ 
+                                if(s_uid == au[i].id){ 
+                                    %>
+                              <span>
+                                <input type="text" class="chatform_seller_name" name="seller_name" value="<%= au[i].name %>"  hidden>
+                                <input type="text" class="chatform_self_id" name="self_uid" value="<%= user.id %>"  hidden>
+                                <input type="text" class="chatform_seller_id" name="seller_uid" value="<%= s_uid %>"  hidden >
+                                <input type="text" class="chatform_home_id" name="home_id" value="<%= conversation[0].home %>"  hidden>
+                              </span>  
+                              <% }} %>
+                                
+                            <% }
+                             else{ 
+                                let s_uid = conversation[0].seller_uid;
+                                %>
+                                <% for(let i =0; i< au.length ; i++){ 
+                                    if(s_uid == au[i].id){ 
+                                        %>
+                                <span>
+                                    <input type="text" class="chatform_seller_name" name="seller_name" value="<%= au[i].name %>"  hidden>
+                                    <input type="text" class="chatform_self_id" name="self_uid" value="<%= user.id %>"  hidden>
+                                    <input type="text" class="chatform_seller_id" name="seller_uid" value="<%= s_uid %>" hidden>
+                                    <input type="text" class="chatform_home_id" name="home_id" value="<%= conversation[0].home %>"  hidden>
+                                </span> 
+                                <% }} %>
+                            <% } %>
+                             
+
+                     
+                     
+                     
+                </form>
+            </div>
+            </div>
+            <%}
+              else{
+              %>
+              <div class="col-9">
+                <div class="ql-container text-center text-dark ">
+                    <p> No available chat... 
+                    </p>
+                </div>
+              </div>
+                <%}%>
+    
+        </div>
+        
+    </div>
+    <%- include('./partials/foot.ejs') %>
+    <script>
+
+    const chatform = document.querySelector('form.chatform');
+    const chatform_seller_name = document.querySelector('.chatform_seller_name');
+    const chatform_home_id = document.querySelector('.chatform_home_id');
+    const chatform_main_message = document.querySelector('.chatform_main_message');
+    const chatform_self_id = document.querySelector('.chatform_self_uid');
+    const chatform_seller_id = document.querySelector('.chatform_seller_uid'); 
+
+                // on submit for the contact owner form
+                chatform.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        let home = chatform.home_id.value;
+        let seller_name = chatform.seller_name.value;
+        let main_message = chatform.main_message.value;
+        let self_uid = chatform.self_uid.value;
+        let seller_uid = chatform.seller_uid.value;
+
+        try{
+                 await fetch('/chatbox', { 
+                method: 'POST',   
+                body: JSON.stringify({ 
+                    seller_name,
+                    home,
+                    main_message,
+                    self_uid,
+                    seller_uid
+                 }),
+                headers: {'Content-Type': 'application/json'}
+                })
+                .then((res) => res.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch ((err) => {
+                        console.log(err);
+                    })
+            }
+        catch (err) {
+                        console.log(err);
+                    }
+    })
+      
+        
+    </script>
+</body>
+</html>

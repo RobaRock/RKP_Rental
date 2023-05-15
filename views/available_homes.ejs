@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+<body>
+    <div> <!-- content wrapper-->
+      <%- include('./partials/nav.ejs') %>
+        <hr class="hr" />
+        <!-- Large button groups (default and split) -->
+        <form onclick="validation()" class="filter_form" method="post" action="/filter_view" name="filter_form">
+        
+      </form>
+        <hr class="hr" />
+
+        <!-- for body part-->
+            <div class="row g-0">
+              
+                <div class="map col-md-6 d-none d-xl-block overflow-hidden text-start" id="mapid">
+                    <!--Google map-->
+                    <!-- <div>
+                       <p> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125074.67214649891!2d37.310210592356036!3d11.581686588732733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1644d23307d78069%3A0xab0b134f632dff8!2sBahir%20Dar%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1669835695805!5m2!1sen!2sus"
+                        class="sticky-bottom" width="580" height="450" style="border:0;" allowfullscreen="" 
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p> 
+                    </div> -->
+                   
+                </div>
+                <div class="col-xl-6 overflow-auto">
+                    <div class="row m-1 gap-4">
+                      <%
+                     
+                      
+                      if(rental.length > 0) { 
+                        let size = rental.length;
+                       for(var i=0 ; i< size ; i++)
+                       {
+                        let type = rental[i].type;
+                        let id = rental[i]._id;
+                        let fronthome = rental[i].pic1;
+                        let price = rental[i].price;
+                        let bedroom = rental[i].bedroom;
+                        let bathroom = rental[i].bathroom;
+                        let total_room = bedroom + bathroom + 1;
+                        let sqrt = rental[i].sqrt;
+                        let home_status = rental[i].type;
+                        let additionalfeature = rental[i].additionalfeature;
+                        let isRented = rental[i].Rented; 
+                        console.log("latitude: ",rental[i].lat, "longtide: ", rental[i].lng)
+                    
+                        %>
+                       
+                        <div id="apart<%=i%>" class="card fh5co-section-gray" style="width: 18rem;">
+                          <img class="card-img-top position-relative" src="/homes/<%=fronthome%>" alt="Card image cap">
+                         
+                          <div class="card-body text-center">
+                            <h5 class="card-title"><%= price %> ETB/Month</h5>
+                            <p class="card-subtitle "><%= bedroom %>|bd <%= bathroom %>|ba <%= sqrt %>sqrt-Home for <%=type%> </p>
+                            <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                            <%if(isRented === 'true' && home_status==='rent'){%>
+                            <p class="card-text fw-bolder text-danger">!RENTED!</p>
+                            <%} else if(isRented === 'true' && home_status==='sell'){%>
+                              <p class="card-text fw-bolder text-danger">!SOLD!</p>
+                              <%}%>
+                            <form action="/individual_house/<%= id %>" method="post">
+                              <% if(user){%>
+                              <input type="text" hidden name="uid" value="<%= user.id%>">
+                              <% }else{
+                                <!-- user.id = null; -->
+                                %>
+                                   
+                                <input type="text" hidden name="uid" >
+                                <%}%>
+                                <input type="text" hidden name="lat" id="lat<%=i%>" value="<%=rental[i].lat%>">
+                                <input type="text" hidden name="lng" id="lng<%=i%>" value="<%=rental[i].lng%>">
+                                
+                                <input type="text" hidden name="area" id="area<%=i%>" value="<%=sqrt%>">
+                                <input type="text" hidden name="rooms" id="rooms<%=i%>" value="<%=total_room%>">
+                                <input type="text" hidden name="pic" id="pic<%=i%>" value="<%=fronthome%>">
+                                <input type="text" hidden name="pri" id="pri<%=i%>" value="<%=price%>">
+                                
+                               
+                              <button type="submit" class="btn btn-primary"> View House</button>
+                            </form>
+                                <!-- <a href="/individual_house/<%= id %>" class="btn btn-primary">View House</a> -->
+                                <%if(1===1){ 
+                                  let averagee=0;
+                                   let flag2 = 0;
+                                  let floor_star;
+                                  
+                                  var roundedNumber;
+                                  %>
+                                  <%if(user){%>
+                                <form class="form_rating" action="/rating" method="post">
+                                <%
+                                let flag = 0;
+                                for(let a =0; a<array_of_home_id_and_rating.length; a++){
+                                
+                                  
+                                if(rental[i].id === array_of_home_id_and_rating[a].home_id){
+                                  for(let b=0 ; b<array_of_home_id_and_rating[a].user_id.length; b++){
+                                   
+                                    if(user.id === array_of_home_id_and_rating[a].user_id[b]){
+                                      flag =1;
+                                      averagee = array_of_home_id_and_rating[a].rating_id;
+                                     
+                                       floor_star = Math.floor(averagee);
+                                       
+                                      console.log(floor_star)
+                                      console.log(averagee)
+                                      
+                                       if(floor_star === averagee){   
+                                      for(let q=0; q<floor_star ;q++){
+                               %>
+                               <span><i class="bi bi-star-fill pe-4"></i></span>
+                              <% } for(let c= floor_star ; c<5 ; c++){
+                                %>
+                                <span><i class="bi bi-star icon pe-4"></i></span>
+                              
+                               <%} } else{
+                                for(let j=0; j<floor_star ;j++){
+                                %>
+                                <span><i class="bi bi-star-fill pe-4"></i></span>
+                              <% } for(let c= floor_star ; c<5 ; c++){
+
+                                 if(flag2===0){
+                                  flag2=1;
+                                %>
+                                <span><i class="bi bi-star-half pe-4"></i></span>
+                                <% }else {%>
+                                  <span><i class="bi bi-star icon pe-4"></i></span>
+                             <% }}}%>
+                             <small class="d-block"><%= array_of_home_id_and_rating[a].user_id.length%> people reated so far</small>
+                            <%}
+                               else{ 
+                                if(flag ===0 && b === array_of_home_id_and_rating[a].user_id.length-1 ){
+                                  flag=1;
+                                 
+                                  averagee = array_of_home_id_and_rating[a].rating_id;
+                                  for(let j=0; j<5 ;j++){
+                                    
+                                %>
+                                <span class="rating_home"> <button onclick="ratingNumber('<%=j+1%>','<%=i+1%>', '<%=id%>')" class="btn border-0"><i class="bi bi-star icon<%=j%>"></i></button></span>
+                                <%}%>
+                                <small class="d-block"><%= array_of_home_id_and_rating[a].user_id.length%> people reated so far</small>
+                                <input class="rating_number" id="rating_number<%=i%>" type="text" hidden name="rating_number<%=i+1%>" value="">
+                               <input class="home_id" id="home_id<%=i%>" type="text" hidden name="home_id<%=i+1%>" value="">
+                              <%}}  }} 
+                                else{ 
+                                  if(flag===0 && a=== array_of_home_id_and_rating.length-1 ){
+                                  flag=1;
+                                  averagee = 0;
+                                  for(let j=0; j<5 ;j++){
+                                  %>
+                                  <span class="rating_home"> <button onclick="ratingNumber('<%=j+1%>','<%=i+1%>', '<%=id%>')" class="btn border-0"><i class="bi bi-star icon<%=j%>"></i></button></span>
+                                  <%} %>
+                                  <small class="d-block">0 people reated so far</small>
+                                  <input class="rating_number" id="rating_number<%=i%>" type="text" hidden name="rating_number<%=i+1%>" value="">
+                                  <input class="home_id" id="home_id<%=i%>" type="text" hidden name="home_id<%=i+1%>" value="">
+                                <%}}}%>
+                                </form>
+                                <%}%>
+                                <%if(averagee !== 0){%>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                               <% roundedNumber = Math.round(averagee* 10) / 10; %>
+                               <%=roundedNumber%>
+
+                           
+                          </span>
+                         
+                          <%}%>
+                          <span class="status position-absolute top-0 start-0" style="color: blue;">For <%=type%></span>
+                              
+                            <%}%>
+                                
+                                                        
+                          </div>
+                        </div> 
+
+
+                        <%} } else {  %>
+                          <p class="text-center"> Not found searched item </p>
+                          <% }%>
+                          <hr class="hr" />
+                         
+                         
+                    </div> 
+                </div>
+                
+            </div>
+            <%- include('./partials/foot.ejs') %>
+
+    </div>   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
+   <script>
+
+    let length_of_homes = '<%=rental.length%>'
+    let arrayRatingNumber = [];
+    let arrayHomeId = []
+    for(let i=0; i<length_of_homes; i++){
+      arrayRatingNumber.push(document.querySelector('#rating_number'+i)); 
+      arrayHomeId.push(document.querySelector('#home_id'+i)); 
+  
+    }
+      console.log(arrayHomeId)
+      console.log(arrayRatingNumber[5].type)
+  
+    function ratingNumber(j,i,id){
+      console.log(j,i,id)
+      arrayRatingNumber[i-1].value = j
+      arrayHomeId[i-1].value = id;
+    }
+
+    
+    </script>
+    <script>
+      
+       const filter_form = document.querySelector('form.filter_form');
+       const kebele_1_ = document.querySelector('.kebele_1');
+       const kebele_2_ = document.querySelector('.kebele_2');
+       const kebele_3_ = document.querySelector('.kebele_3');
+       const kebele_4_ = document.querySelector('.kebele_4');
+       const kebele_5_ = document.querySelector('.kebele_5');
+       const kebele_6_ = document.querySelector('.kebele_6');
+       const kebele_7_ = document.querySelector('.kebele_7');
+       const kebele_8_ = document.querySelector('.kebele_8');
+       const kebele_9_ = document.querySelector('.kebele_9');
+       const kebele_10_ = document.querySelector('.kebele_10');
+       const kebele_11_ = document.querySelector('.kebele_11');
+       const kebele_12_ = document.querySelector('.kebele_12');
+       const kebele_13_ = document.querySelector('.kebele_13');
+       const kebele_14_ = document.querySelector('.kebele_14');
+       const kebele_15_ = document.querySelector('.kebele_15');
+       const kebele_16_ = document.querySelector('.kebele_16');
+       const kebele_17_ = document.querySelector('.kebele_17');
+       const kebele_18_ = document.querySelector('.kebele_18');
+       const minimum_value_ = document.querySelector('.minimum_value');
+       const maximum_value_ = document.querySelector('.maximum_value');
+       let kebele_1 = filter_form.kebele_1;
+        let kebele_2 = filter_form.kebele_2;
+        let kebele_3 = filter_form.kebele_3;
+        let kebele_4 = filter_form.kebele_4;
+        let kebele_5 = filter_form.kebele_5;
+        let kebele_6 = filter_form.kebele_6;
+        let kebele_7 = filter_form.kebele_7;
+        let kebele_8 = filter_form.kebele_8;
+        let kebele_9 = filter_form.kebele_9;
+        let kebele_10 = filter_form.kebele_10;
+        let kebele_11 = filter_form.kebele_11;
+        let kebele_12 = filter_form.kebele_12;
+        let kebele_13 = filter_form.kebele_13;
+        let kebele_14 = filter_form.kebele_14;
+        let kebele_15 = filter_form.kebele_15;
+        let kebele_16 = filter_form.kebele_16;
+        let kebele_17 = filter_form.kebele_17;
+        let kebele_18 = filter_form.kebele_18;
+        let minimum_value = filter_form.minimum_value.value;
+        let maximum_value = filter_form.maximum_value.value;
+
+      
+      //function
+      function validation(){
+        if(kebele_1_.checked){
+          kebele_1.value = '1';
+        }
+        if(kebele_2_.checked){
+          kebele_2.value = '2';
+        }
+        if(kebele_3_.checked){
+          kebele_3.value = '3';
+        }
+        if(kebele_4_.checked){
+          kebele_4.value = '4';
+        }
+        if(kebele_5_.checked){
+          kebele_5.value = '5';
+        }
+        if(kebele_6_.checked){
+          kebele_6.value = '6';
+        }
+        if(kebele_7_.checked){
+          kebele_7.value = '7';
+        }
+        if(kebele_8_.checked){
+          kebele_8.value = '8';
+        }
+        if(kebele_9_.checked){
+          kebele_9.value = '9';
+        }
+        if(kebele_10_.checked){
+          kebele_10.value = '10';
+        }
+        if(kebele_11_.checked){
+          kebele_11.value = '11';
+        }
+        if(kebele_12_.checked){
+          kebele_12.value = '12';
+        }
+        if(kebele_13_.checked){
+          kebele_13.value = '13';
+        }
+        if(kebele_14_.checked){
+          kebele_14.value = '14';
+        }
+        if(kebele_15_.checked){
+          kebele_15.value = '15';
+        }
+        if(kebele_16_.checked){
+          kebele_16.value = '16';
+        }
+        if(kebele_17_.checked){
+          kebele_17.value = '17';
+        }
+        if(kebele_18_.checked){
+          kebele_18.value = '18';
+        }
+      }
+    </script>
+    <script>
+      let leng = '<%=rental.length%>'
+      let latlng = [];
+      let lat = [];
+      let lng = [];
+      let rrf = [];
+      let all_prices = [];
+      let all_areas = [];
+      let all_pics = [];
+      let all_rooms = [];
+      let all_apparts = [];
+
+      for(let i=0; i<leng; i++){
+        all_apparts.push(document.querySelector('#apart'+i)); 
+        
+        // latlong.push([])
+        rrf.push(document.querySelector('#lat'+i).value)
+        rrf.push(document.querySelector('#lng'+i).value)
+        all_prices.push(document.querySelector('#pri'+i).value)
+        all_areas.push(document.querySelector('#area'+i).value)
+        all_pics.push(('/homes/'+ document.querySelector('#pic'+i).value))
+        all_rooms.push(document.querySelector('#rooms'+i).value)
+      }
+     for(let i=0; i<rrf.length; i++){
+      if(i % 2 === 0){
+        lat.push(rrf[i]);
+      } else{
+        lng.push(rrf[i]);
+      }
+     }
+     for(let i=0; i<lat.length; i++){
+      latlng.push([lat[i],lng[i]]);
+     }
+    
+      console.log(all_pics);
+     
+      var map = L.map('mapid').setView([11.5846,37.3839], 13);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+      {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+         }).addTo(map);
+         
+         coords = latlng;
+         rent = all_prices;
+         let l = coords.length;
+
+         aparts = all_apparts;
+         areas = all_areas
+         rooms = all_rooms
+         images = all_pics
+      
+
+         for(let i = 0 ; i<l; i++){
+          //popups
+          var pop = L.popup({
+          closeOnClick: true
+         }).setContent('<h4>Area: '+ areas[i]+ '<br>Rooms: ' + rooms[i] +'</h4><img src='+ images[i] + ' style="height: 100px">');
+
+         var greenIcon = new L.Icon({
+                                  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                  iconSize: [25, 41],
+                                  iconAnchor: [12, 41],
+                                  popupAnchor: [1, -34],
+                                  shadowSize: [41, 41]
+                                });
+          // markers
+          var marker = L.marker(coords[i],{icon: greenIcon}).addTo(map).bindPopup(pop);
+      
+          // labels
+          var toollip = L.tooltip({
+            permanent: true
+          }).setContent(rent[i]);
+          marker.bindTooltip(toollip);
+
+          aparts[i].addEventListener("mouseover", ()=>{
+            map.flyTo(coords[i],19);
+          })
+         }
+         let markerL,circleL,zoomed, marker_from_to;
+         let distance = [];
+         var taxi_icon = L.icon({
+          iconUrl: "/R.gif",
+          iconSize: [70,70]
+         })
+         navigator.geolocation.watchPosition(success, error);
+
+         function success(pos){
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          const accuracy = pos.coords.accuracy;
+          console.log(lat,lng,accuracy);
+
+          if(markerL){
+            map.removeLayer(markerL);
+            map.removeLayer(circleL);
+          }
+
+           markerL = L.marker([lat,lng],{icon: taxi_icon}).addTo(map).bindPopup('My location');
+           circleL = L.circle([lat,lng], {radius: accuracy}).addTo(map);
+
+           //getting the shortest distance from the registered lacation marker
+          for(let i=0; i<leng ; i++){
+           var from = [lat,lng];
+           var to = latlng[i];
+           distance.push(getDistance(from, to)) 
+          }
+          function getDistance(origin, destination) {
+    // return distance in meters
+    var lon1 = toRadian(origin[1]),
+        lat1 = toRadian(origin[0]),
+        lon2 = toRadian(destination[1]),
+        lat2 = toRadian(destination[0]);
+
+    var deltaLat = lat2 - lat1;
+    var deltaLon = lon2 - lon1;
+
+    var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+    var c = 2 * Math.asin(Math.sqrt(a));
+    var EARTH_RADIUS = 6371;
+    return c * EARTH_RADIUS * 1000;
+      }
+      function toRadian(degree) {
+          return degree*Math.PI/180;
+      }
+
+      //from the whole distance findout the short one
+      let index = 0;
+      let short_dis = distance[0];
+      for(let i=1; i< distance.length ; i++){
+        if(distance[i] < short_dis){
+          short_dis = distance[i]
+          index = i;
+        }
+      }
+      console.log(short_dis, 'index: ',index)
+      let short_latlng = latlng[index];
+
+      if(marker_from_to){
+        map.removeLayer(marker_from_to);
+      }
+            marker_from_to = L.Routing.control({
+        waypoints: [
+          L.latLng(lat, lng),
+          L.latLng(short_latlng)
+        ]
+      }).on('routesfound', function(e){
+        console.log('gfhjk');
+        e.routes[0].coordinates.forEach(function(coords,index){
+          setTimeout(()=>{
+            markerL.setLatLng([coords.lat,coords.lng])
+          }, 100*index)
+        })
+      })
+      
+      .addTo(map);
+
+          if(!zoomed){
+            zoomed =  map.fitBounds(circle.getBounds());
+          }
+          map.setView([lat,lng]);
+          
+         }
+
+         function error(err){
+          if(err.code === 1){
+            alert("Please alow location in your setting")
+          }
+          else{
+            alert("cannot get current location");
+          }
+         }
+       
+      </script>
+</body>
+</html>

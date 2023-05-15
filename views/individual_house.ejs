@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <head>
+        <link rel="stylesheet"
+          href=
+"https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+          crossorigin="anonymous">
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous">
+    </script>
+    </head>
+ 
+    
+<body>
+    <div>
+        <%- include('./partials/nav.ejs') %>
+    <hr class="hr" />
+    <% if(rental)
+            {
+                <!-- console.log(rental); -->
+                let pic1 = rental.pic1;
+                let id = rental._id;
+                let pic2 = rental.pic2;
+                let pic3 = rental.pic3;
+                let pic4 = rental.pic4;
+                let additionalfeature = rental.additionalfeature;
+                let phonenumber = rental.phonenumber;
+                let name = rental.name;
+                let price = rental.price;
+                let totalprice = price * 100;
+                let bedroom = rental.bedroom;
+                let bathroom = rental.bathroom;
+                let location = rental.location;
+                let sqrt = rental.sqrt;
+                let seller_uid = rental.uid;
+                let vedio = rental.vedio;
+                let self_uid = user.id;
+                let isRented = rental.Rented;
+                let priceUsd = price/55;
+
+                var splitVedio = vedio.split(".");
+                var vedioWebM = splitVedio[0] + '.WebM'
+            
+                let checkcheck = check[0];
+               console.log(seller_uid);
+               <!-- console.log(self_uid); -->
+              
+
+            %>
+    <div class="row g-0">
+
+
+        <div class="col-md-6">
+            <div class="row g-5">
+                <div class="col-md-12">
+                    <div class="container-md">
+                <div id="GFG" class="carousel slide carousel-fade"
+             data-ride="carousel">
+ 
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src=
+                                "/homes/<%= pic1 %>"
+                             height="400px" width="400px"
+                             alt="Java" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=
+                                "/homes/<%= pic2 %>"
+                             height="400px" width="400px"
+                             alt="HTML" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=
+                                "/homes/<%= pic3 %>"
+                             height="400px" width="400px"
+                             alt="Angular" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src=
+                                "/homes/<%= pic4 %>"
+                             height="400px" width="400px"
+                             alt="Angular" class="d-block w-100">
+                    </div>
+                <button class="carousel-control-prev" href="#GFG"
+                        data-slide="prev">
+                    <span class="carousel-control-prev-icon">
+                    </span>
+                </button>
+                <button class="carousel-control-next" href="#GFG"
+                        data-slide="next">
+                    <span class="carousel-control-next-icon">
+                    </span>
+                </button>
+                </div>
+
+        </div>
+        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="container-md">
+                        <%if(!(vedio==="")){%>
+                           
+                            <video  width="655" controls>
+                                <source src="/homes/<%= vedio %>">
+                                <source src="/homes/<%= vedioWebM %>">
+                                </video>
+                           
+                        <%} else{%>
+                            <p>No available vedio are found</p>
+                        <%}%>
+                    </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="container-md">
+                            <div style="position:relative;"><div style="padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="https://seekbeak.com/v/YbjN3N5nqA7" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:none" allowFullScreen="true" webkitAllowFullScreen mozallowfullscreen allowFullScreen allow="accelerometer;autoplay;encrypted-media;gyroscope;xr-spatial-tracking;xr;geolocation;picture-in-picture;fullscreen;camera;microphone"></iframe></div></div>
+                            </div>
+                        </div>
+
+
+                </div>
+
+            
+
+
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="container-md">
+                <div class="text-end my-5">
+                    <span class="pe-4">
+                        <%if(isRented === 'false'){%>
+                      <form class="savedhome" name="savedhomes" method="" action=""> 
+
+                            <input class="id saved" name="id" type="text" value="<%= id %>" hidden>    
+`                           <input class="name saved" name="name" type="text" value="<%= name %>" hidden>
+                            <input class="phonenumber saved" name="phonenumber" type="text" value="<%= phonenumber %>" hidden>
+                            <input class="price saved" name="price" type="text" value="<%= price %>" hidden>
+                            <input class="bedroom saved" name="bedroom" type="text" value="<%= bedroom %>" hidden>
+                            <input class="bathroom saved" name="bathroom" type="text" value="<%= bathroom %>" hidden>
+                            <input class="location saved" name="location" type="text" value="<%= location %>" hidden>
+                            <input class="sqrt saved" name="sqrt" type="text" value="<%= sqrt %>" hidden>
+                            <input class="additionalfeature saved" name="additionalfeature" type="text" value="<%= additionalfeature %>" hidden>
+                            <input class="uid saved" name="uid" type="text" value="<%= user._id %>" hidden>
+                            <input class="pic1 saved" name="pic1" type="text" value="<%= pic1 %>" hidden>
+                            <input class="pic2 saved" name="pic2" type="text" value="<%= pic2 %>" hidden>
+                            <input class="pic3 saved" name="pic3" type="text" value="<%= pic3 %>" hidden>
+                            <input class="pic4 saved" name="pic4" type="text" value="<%= pic4 %>" hidden>
+                            <input class="aa checkcheck"  type="text" value="<%= checkcheck %>" hidden>
+                          
+                       <div class="row ms-2">
+                            <div class="col-1">
+                                <button  class="border border-white" >
+                                    <i class="" id="heart_icon"></i>
+                                </button>
+                            </div>
+                        </div>    
+                            
+                      </form>
+                      <div class="col-1">
+                                <button class="border border-white" data-bs-toggle="modal" data-bs-target="#sendreport">  <i class="bi bi-envelope fa-2x"></i>
+                                </button>
+                            </div>
+                            <%}%>
+                </div>
+                <div class="align-text-center">
+                    <h3 class="text-center text-secondary">
+                       <%= name %>
+                    </h3>
+                    <p class="text-secondary text-center">
+                        Discription
+                    </p>
+                    <div class="mb-5">
+                        <small class="lead text-secondary text-center d-block">
+                            <%= additionalfeature %>
+                        </small>
+                        <div class="text-center">
+                           <a href="#">
+                            <small class="lead text-secondary fw-bold">
+                                +(251)- <%= phonenumber %>
+                            </small>
+                           </a> 
+                        </div>
+                    </div>
+                    <%if(isRented==='false'){%>
+                    <div class="row ">
+                        <div class="text-center mb-2 col-xl-12">
+                            <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#sendmessage">  request to apply
+                            </button>
+                        </div>
+                        <hr>
+                        <div class="col-12 mb-5 text-center">
+                            <p class="fw-bolder " style="font-size: 20px;"> Choose one payment method below and</p>
+                            <p class="fw-bolder "style="font-size: 20px;"> Make <i  >instant</i> and <i >secure</i> transfer</p>
+                            </div>
+                        <div class="col-12 mb-5" ></div>
+                        <hr>
+                        <p class="fw-bolder " style="font-size: 20px;">Stripe:</p>
+                        <div class="text-start col-4 p-5">
+                            <form action="/payment" method="post" id="payment-form">
+                                <input type="hidden" name="amount" value="<%= totalprice %>">
+                            <script
+                                src="https://checkout.stripe.com/checkout.js"
+                                class="stripe-button"
+                                data-key="<%= key %>"
+                                data-name="<%= name %>"
+                                data-description="Handmade Art and Craft Products"
+                                data-image="/img/logo.png"
+                                data-locale="auto"
+                                data-currency="etb"
+                                data-allow-remember-me="false"
+                                data-zip-code="true"
+                                data-billing-address="true"
+                                data-shipping-address="true"
+                                data-label="Pay with Card"
+                                data-panel-label="Pay <%= totalprice / 100 %> ETB"
+                                >
+                                
+                                </script>
+                                <script>
+                            var form = document.getElementById('payment-form');
+                            form.addEventListener('submit', function(event) {
+                                event.preventDefault();
+                                // Disable the submit button to prevent multiple clicks
+                                document.querySelector('.stripe-button').disabled = true;
+                                // Create a token using Stripe.js
+                                Stripe.createToken('card', function(result) {
+                                if (result.error) {
+                                    // Inform the user if there was an error
+                                    var errorElement = document.getElementById('card-errors');
+                                    errorElement.textContent = result.error.message;
+                                    // Re-enable the submit button
+                                    document.querySelector('.stripe-button').disabled = false;
+                                } else {
+                                    // Send the token to your server along with the payment amount
+                                    var tokenInput = document.createElement('input');
+                                    tokenInput.setAttribute('type', 'hidden');
+                                    tokenInput.setAttribute('name', 'stripeToken');
+                                    tokenInput.setAttribute('value', result.token.id);
+                                    form.appendChild(tokenInput);
+                                    
+                                    var amountInput = document.createElement('input');
+                                    amountInput.setAttribute('type', 'hidden');
+                                    amountInput.setAttribute('name', 'amount');
+                                    amountInput.setAttribute('value', '<%= totalprice%>');
+                                    form.appendChild(amountInput);
+                                    
+                                    // Submit the form
+                                    form.submit();
+                                }
+                                });
+                            });
+                        </script> 
+                            </form>
+                            </div>
+                            <div class="col-6 text-end">
+                                <img src="/stripelogo.jpg" width="200" height="auto" alt="stripe_logo">
+                                </div>
+                                <hr>
+                            <p class="fw-bolder " style="font-size: 20px;">Paypal:</p> 
+                            <div class="col-5">
+                                <p class="ms-2">Pay <%= priceUsd %>USD </p>
+                                <form action="/pay" method="post">
+                                    <input class="btn btn-primary" type="submit" value="Pay with Paypal">
+                                    </form>
+                               
+                                </div> 
+                            <div class="col-6 text-end">
+                                 <img src="/paypal_logo.jpg" width="200" height="auto" alt="stripe_logo">
+                            </div>
+                            <div class="col-12"></div>
+                            <hr>
+                            <p class="fw-bolder " style="font-size: 20px;">Chapa:</p> 
+                            <% if(1===1){
+                                let randomNumber = Math.floor( Math.random() * 1000 - 10 + 1000 );
+                                let sampleStrng = 'atrdfgf' + randomNumber;
+                                console.log(sampleStrng);
+                                let chapaPublicKey = 'CHAPUBK_TEST-tS7oIeQKqdsU7LLaIcfgwfShEos7IFen';
+                                console.log('above')
+                                        %>
+                            <div class="col-5">
+                                <form method="POST" action="https://api.chapa.co/v1/hosted/pay" >
+                                        <input type="hidden" name="public_key" value="<%=chapaPublicKey%>" />
+                                        <input type="hidden" name="tx_ref" value="<%= randomNumber %>" />
+                                        <input type="hidden" name="amount" value="3000" />
+                                        <input type="hidden" name="currency" value="ETB" />
+                                       
+                                        <input type="hidden" name="email" value="melat@gmail.com" />
+                                        <input type="hidden" name="first_name" value="Melat" />
+                                        <input type="hidden" name="last_name" value="Asfaw" />
+                                        <input type="hidden" name="title" value="Let us do this" />
+                                        <input type="hidden" name="description" value="Paying with Confidence with chapa" />
+                                        <input type="hidden" name="callback_url" value="https://example.com/returnurl" />
+                                        <input type="hidden" name="return_url" value="https://example.com/returnurl" />
+                                        <button type="submit" class="btn btn-primary">Pay with Chapa</button>
+                                    </form>
+                                </div>
+                                <%}%>
+                            <div class="col-6 text-end">
+                                 <img src="/chapa_logo.jpg" width="200" height="auto" alt="stripe_logo">
+                            </div>
+
+                    </div>
+                    <%}%>
+                    
+                    <hr class="hr" />
+                   <!--Modals for Send message primary-->
+                    <div class="modal" id="sendmessage" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title h3" id="modal-title">
+                                        Contact the Owner
+                                    </h1>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="close"></button>
+                                </div>
+                                <div class="hr/"></div>
+                                <div class="modal-body">
+                                    <div>
+                                        <i class="bi bi-chat-left-dots-fill fa-2x"></i>
+                                        <p>Get more info about this home from an owner. Send a message below or call +(251)-<%= phonenumber %>.</p>
+                                    </div>
+                                    <div class="hr/"></div>
+                                    <div class="container-lg my-1">
+                                        <div class="row justify-content-center my-1">
+                                            <div class="cols-lg-6">
+                                                <form class="chatform" name="chatform" >
+                                                    <div class="mb-4 input-group"> 
+                                                        <textarea class="chatform_main_message form-control border-primary" placeholder="your message" name="main_message"  cols="30" rows="2" style="width: 100%;">
+                                                        </textarea>
+                                                    
+                                                    </div>
+                                                    
+                                                    <div class="text-center mt-4 mb-2">
+                                                        <button  class="btn btn-primary">
+                                                            Contact an owner
+                                                        </button>
+                                                    </div>
+                                                    <span>
+                                                        <input type="text" class="chatform_seller_name" name="seller_name" value="<%= name %>" hidden>
+                                                        <input type="text" class="chatform_self_id" name="self_uid" value="<%= self_uid %>" hidden>
+                                                        <input type="text" class="chatform_seller_id" name="seller_uid" value="<%= seller_uid  %>" hidden>
+                                                        <input type="text" class="chatform_home_id" name="home_id" value="<%= rental._id %>" hidden>
+                                                    </span>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--Modals for report  format-->
+
+                    <div class="modal" id="sendreport" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title h3" id="modal-title">
+                                       Report the Home
+                                    </h1>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="close"></button>
+                                </div>
+                                <div class="hr/"></div>
+                                <div class="modal-body">
+                                    <div>
+                                        <i class="bi bi-chat-left-dots-fill fa-2x"></i>
+                                        <p>Report means  the action of notifying the system administrators about a user's behavior that violates the system's terms of service or community guidelines or call  +(251)-935858193.</p>
+                                    </div>
+                                    <div class="hr/"></div>
+                                    <div class="container-lg my-1">
+                                        <div class="row justify-content-center my-1">
+                                            <div class="cols-lg-6">
+                                                <form method="post" action="/report" class="reportform" name="reportform" >
+                                                    <div class="mb-4 input-group"> 
+                                                        <textarea class="reportform_main_message form-control border-primary" placeholder="your message" name="message"  cols="30" rows="2" style="width: 100%;">
+                                                        </textarea>
+                                                    </div>
+                                                    <div class="text-center mt-4 mb-2">
+                                                        <button  class="btn btn-primary">
+                                                            Report
+                                                        </button>
+                                                    </div>
+                                                    <span>
+                                                        <input type="text" class="reportform_self_id" name="report_self_uid" value="<%= self_uid %>" hidden>
+                                                        <input type="text" class="reportform_home_id" name="homeid" value="<%= rental._id %>" hidden>
+                                                        <input type="text" class="reportform_seller_id" name="report_seller_uid" value="<%= seller_uid  %>" hidden>
+                                                    </span>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                   
+                </div>
+            </div>
+        </div> 
+    </div>
+    <% } else{ %>
+        <p class="text-center"> nothing to display</p>
+        <%- include('./login.ejs') %>
+        <hr class="hr" />
+        <%- include('./partials/foot.ejs') %>
+    <% }%>  
+</div>
+<%- include('./partials/foot.ejs') %>
+     
+    
+<script 
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+</script>    
+<script>
+    // chat_form input values    
+    const chatform = document.querySelector('form.chatform');
+    const chatform_seller_name = document.querySelector('.chatform_seller_name');
+    const chatform_home_id = document.querySelector('.chatform_home_id');
+    // const chatform_name = document.querySelector('.chatform_name');
+    const chatform_main_message = document.querySelector('.chatform_main_message');
+    const chatform_self_id = document.querySelector('.chatform_self_uid');
+    const chatform_seller_id = document.querySelector('.chatform_seller_uid'); 
+
+  
+    // on submit for the contact owner form
+    chatform.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        let home = chatform.home_id.value;
+        let seller_name = chatform.seller_name.value;
+        let main_message = chatform.main_message.value;
+        let self_uid = chatform.self_uid.value;
+        let seller_uid = chatform.seller_uid.value;
+         console.log('roba')
+        try{
+            console.log('roba')
+                 await fetch('/chatbox', { 
+                method: 'POST',   
+                body: JSON.stringify({ 
+                    seller_name,
+                    home,
+                    main_message,
+                    self_uid,
+                    seller_uid
+                 }),
+                headers: {'Content-Type': 'application/json'}
+                })
+                .then((res) => res.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch ((err) => {
+                        console.log(err);
+                    })
+            }
+        catch (err) {
+                        console.log(err);
+                    }
+    })
+
+
+    const savedform = document.querySelector('form.savedhome');
+    const id = document.querySelector('.id.saved').value;
+    const name = document.querySelector('.name.saved').value;
+   
+    const phonenumber = document.querySelector('.phonenumber.saved').value;
+    const price = document.querySelector('.price.saved').value;
+    const bedroom = document.querySelector('.bedroom.saved').value;
+    const bathroom = document.querySelector('.bathroom.saved').value;
+    const locationsaved = document.querySelector('.location.saved').value;
+    const sqrt = document.querySelector('.sqrt.saved').value;
+    const additionalfeature = document.querySelector('.additionalfeature.saved').value;
+    const uid = document.querySelector('.uid.saved').value;
+    const pic1 = document.querySelector('.pic1.saved').value;
+    const pic2 = document.querySelector('.pic2.saved').value;
+    const pic3 = document.querySelector('.pic3.saved').value;
+    const pic4 = document.querySelector('.pic4.saved').value;  
+    const path = "/delete_savedhome";
+    const checkcheck = document.querySelector('.aa.checkcheck').value;  
+    
+    if(checkcheck === ''){
+        var value = true;
+        document.getElementById('heart_icon').className = "bi fa-2x bi-heart"; 
+    }
+    else{
+        var value = false;
+        document.getElementById('heart_icon').className = "bi fa-2x bi-heart-fill"; 
+    }
+    
+   
+    console.log(checkcheck);
+
+  
+
+    
+    savedform.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        if(value){
+                console.log(name);
+                console.log(phonenumber);
+                
+                document.getElementById('heart_icon').className = "bi fa-2x bi-heart-fill"; 
+                //cartNumber+=1;
+                cartNumber = parseInt(cartNumber) + 1;
+                console.log(cartNumber);
+                document.getElementById('cart_value').innerHTML = cartNumber;
+                try{
+                value = !value;
+                const res = await fetch('/savedhomes', { 
+                method: 'POST',   
+                body: JSON.stringify({ id, name,
+                    phonenumber, price,bedroom,
+                    bathroom,locationsaved,sqrt ,additionalfeature,uid
+                    ,pic1,pic2,pic3,pic4 }),
+                headers: {'Content-Type': 'application/json'}
+                });
+            }
+                    catch (err) {
+                                    console.log(err);
+                                }
+        }
+        // /delete_savedhome
+        else{ 
+            document.getElementById('heart_icon').className = "bi fa-2x bi-heart"; 
+                    if(cartNumber > 0){
+                        cartNumber = parseInt(cartNumber) - 1;
+                         document.getElementById('cart_value').innerHTML = cartNumber;
+                                     }
+            try{
+                value = !value;
+                const res = await fetch(`${path}/${id}`, { 
+                method: 'POST',   
+                body: JSON.stringify({ id, name,
+                    phonenumber, price,bedroom,
+                    bathroom,locationsaved,sqrt ,additionalfeature,uid
+                    ,pic1,pic2,pic3,pic4 }),
+                headers: {'Content-Type': 'application/json'}
+                });
+            }
+            catch (err) {
+                            console.log(err);
+                        }
+            }
+
+    })
+
+</script>    
+</body>
+</html>

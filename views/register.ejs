@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+
+  
+<body>
+    <!--Modals for log in-->
+    <%- include('./partials/nav.ejs') %>
+    <div>
+        <section class="h-100 bg-dark">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                  <div class="card card-registration my-4">
+                    <div class="row g-0">
+                      <div class="col-xl-6 d-none d-xl-block">
+                        <img src="RegisterUi.jpg"
+                          alt="Sample photo" class="img-fluid"
+                          style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="card-body p-md-5 text-black">
+                          <h3 class="mb-5 text-uppercase text-center" >Registration form</h3>
+                          <form  class="name signupform">
+                            <label for="name" class="form-label">
+                                Name:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person"> </i>
+                                </span>
+                                <input type="text" class="form-control border-primary" id="name"
+                                    placeholder="e.g robel asfaw" name="name" required >
+                            </div>
+                            <div class="name error text-danger"></div>
+
+                            <label for="phonenumber" class="form-label">
+                                Phone Number:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-phone-fill"></i>
+                                </span>
+                                <input type="number" class="form-control border-primary"
+                                    id="phonenumber" placeholder="0935******" name="phonenumber" required >
+                            </div>
+                            <div class="phonenumber error text-danger"></div>
+                            <label for="email" class="form-label ">
+                                Email:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control border-primary"
+                                    id="email" placeholder="e.g robel@gmail.com" name="email" required >
+                            </div>
+                            <div class="email error text-danger"></div>
+                            <label for="password" class="form-label" >
+                                Password:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <input type="password" class="form-control border-primary"
+                                     placeholder="Create password" name="password" id="password" required>
+                            </div>
+                            <div class="password error text-danger"></div>
+                            <label for="confirm" class="form-label ">
+                                Confirm Password:
+                            </label>
+                            <div class="mb-4 input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <input type="password" class="form-control border-primary"
+                                     placeholder="enter your password again" name="confirm" id="confirm" required>
+                            </div>
+                            <div class="confirm error text-danger"></div>
+                            <div class="form-check text-center mb-3">
+                                <input type="checkbox" class="form-check-label border-primary"
+                                    for="landlord" id="landlord">
+                                <label for="landlord" class="form-check-label">
+                                    I am a rental
+                                </label>
+                            </div>
+                            <input type="text" hidden name="blocked" value="false" id="blocked">
+                            <div class="text-center mt-4 mb-2">
+                                <button  class="btn btn-primary">
+                                    register
+                                </button>
+
+                            </div>
+                            <div class="text-center mb-2">
+                                <span class="text-dark">By submitting, I accept RKP's<a
+                                        href="#"> terms of use. </a></span>
+                            </div>
+
+                        </form>
+                           
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+<div><p></p></div>
+<div><p></p></div>
+<%- include('./partials/foot.ejs') %>
+</body>
+</html>
+
+<script> 
+
+    // intializing for sign_up page
+    const form = document.querySelector('form.name.signupform');
+    const nameError = document.querySelector('.name.error');
+    const phonenumberError = document.querySelector('.phonenumber.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const confirmError = document.querySelector('.confirm.error');
+    var checkbox = document.getElementById("landlord");
+
+
+    //sign_up handler 
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        var landlordd =  false;
+        if (checkbox.checked) {
+        console.log("The checkbox is checked.");
+        landlordd = true
+        } else {
+        console.log("The checkbox is not checked.");
+        landlordd = false
+        }
+
+
+    // reset errors
+    nameError.textContent = '';
+    phonenumberError.textContent = '';
+    emailError.textContent = '';
+    passwordError.textContent = '';
+    confirmError.textContent = '';
+
+    // get values
+    const name = form.name.value;
+    const blocked = form.blocked.value;
+    const phonenumber = form.phonenumber.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    //   const landlord = form.landlord.value;
+
+    try {
+        const res = await fetch('/register', { 
+        method: 'POST', 
+        body: JSON.stringify({ name,phonenumber,email, password, confirm, landlordd, blocked }),
+        headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+        nameError.textContent = data.errors.name;
+        phonenumberError.textContent = data.errors.phonenumber;
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+        confirmError.textContent = data.errors.confirm;
+        }
+        if (data.user && data.isEmailConfirmed) {
+        // location.assign('/');
+        window.location.href = 'http://localhost:3000'
+       
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    });
+</script>

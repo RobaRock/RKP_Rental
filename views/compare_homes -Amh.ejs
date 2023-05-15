@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <div>
+        <%- include('./partials/nav -Amh.ejs') %>
+        <hr class="hr" />
+        <div class="table-responsive">
+  <table class="table table-striped fa-check text-successtable-border border-light">
+    <thead class="border-light">
+      <tr>
+        <th scope="col"></th>
+        <% if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let id = rental[i].id;
+         let fronthome = rental[i].pic1;
+        
+         %>
+        <th scope="col">
+             <div class="card"  style="width: 18rem;">
+            <img style="width: 100; height:auto ;" class="card-img-top position-relative" src="/homes/<%=fronthome%>" alt="Card image cap">
+        </div></th>
+       <%}}%>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">ዋጋ</th>
+        <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let price = rental[i].price;
+        %>
+        <td><i class="fas fa-check text-success"><%= price%></i></td>
+        <%}}%>
+       
+        
+      </tr>
+      <tr>
+        <th scope="row">መኝታ ቤት</th>
+        <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let bedroom = rental[i].bedroom;
+        %>
+        <td><i class="fas fa-check text-success"><%=bedroom%></i></td>
+        <%}}%>
+      </tr>
+      <tr>
+        <th scope="row">መታጠቢያ ቤት</th>
+        <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let bathroom = rental[i].bathroom;
+        %>
+        <td><i class="fas fa-check text-success"><%=bathroom%></i></td>
+        <%}}%>
+      </tr>
+      <tr>
+        <th scope="row">ስፋት</th>
+        <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let sqrt = rental[i].sqrt;
+        %>
+        <td><i class="fas fa-check text-success"><%=sqrt%></i></td>
+        <%}}%>
+      </tr>
+      <tr>
+        <th scope="row">አካባቢ</th>
+        <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+        
+        %>
+        <td><i class="fas fa-check text-success"><%= rental[i].location%></i></td>
+        <%}}%>
+      </tr>
+      <tr>
+        <th scope="row">ተጨማሪ ባህሪ</th>
+         <%
+        if(rental.length > 0) { 
+            let size = rental.length;
+         for(let i=0 ; i< size ; i++)
+        {
+         let additionalfeature = rental[i].additionalfeature;
+        %>
+        <td><i class="fas fa-check text-success"><%=additionalfeature%></i></td>
+        <%}}%>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%- include('./partials/foot -Amh.ejs') %>
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
+</body>
+</html>

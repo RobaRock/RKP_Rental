@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head.ejs') %>
+
+<style>
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+</style>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+   <div class="text-center">
+    
+<p>Click on the buttons to open the detail content.</p>
+   </div>
+
+<div class="row container">
+    <% if(!(profile.length === 0)){ %>
+        <% for( let i = 0 ; i< profile.length ; i++ ){ 
+            %>
+    <div class="col-4">
+        <button class="accordion" style="background-color: white ;"><img  src="/homes/<%= profile[i].pic1%>"  alt="house3" class="ms-5 rounded-circle img-fluid" ></a></button>
+        <div class="panel">
+            <div class="accordion-body">
+                                            <form onclick="validation('<%=i%>')"  class="prev_post" action="/change-post/<%=profile[i].id%>" method="post" enctype="multipart/form-data">
+                                             <div class="row">
+                                                <div class="col-4">
+                                                    <label for="name" class="form-label" > Name:</label> 
+                                                </div>
+                                                <div class="col-6 pb-3">
+                                                    <input type="text" value="<%= profile[i].name %>" name="name" class="name form-control border-primary" required>
+                                                </div>
+                                               
+                                                <div class="col-12">  
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="phonenumber" class="form-label" > Phonenumber:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="number" value="<%=profile[i].phonenumber %>" name="phonenumber"  class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div> 
+
+                                                <div class="col-4">
+                                                    <label for="price" class="form-label" > Price:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="number" value="<%=profile[i].price %>" name="price"  class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div> 
+                                                <div class="col-4">
+                                                    <label for="bedroom" class="form-label" > Bedroom:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="number" value="<%=profile[i].bedroom %>" name="bedroom"  class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="bathroom" class="form-label" > Bathroom:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="number" value="<%=profile[i].bathroom %>" name="bathroom" class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="location" class="form-label" > Location:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="text" value="<%=profile[i].location %>" name="location"  class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="sqrt" class="form-label" > sqrt:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="number" value="<%=profile[i].sqrt %>" name="sqrt" class="form-control border-primary" required>
+                                                </div>
+                                                <div class="col-12">  
+                                                </div> 
+                                                <div class="col-4">
+                                                    <label for="additionalfeature" class="form-label" > Additionalfeature:</label>
+                                                </div> 
+                                                <div class="col-6 pb-3">
+                                                    <input type="text" value="<%=profile[i].additionalfeature %>" name="additionalfeature"  class="form-control border-primary" required>
+                                                </div>
+
+                                                <div class="col-8 text-end pb-3">
+                                                    <input type="file"  accept="Image/*"  name="pic1" class="pic1 form-control file-upload-image border border-white" >
+                                                </div>
+                                                <div class="col-3  pb-3">
+                                                    <img  src="/homes/<%= profile[i].pic1 %>" alt="house3" class="ms-5 rounded-circle img-fluid">
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                              
+                                                <div class="col-8 text-end pb-3">
+                                                    <input type="file"  accept="Image/*"  name="pic2" class="pic2 form-control file-upload-image border border-white" >
+                                                </div>
+                                                <div class="col-3  pb-3">
+                                                    <img  src="/homes/<%= profile[i].pic2 %>" alt="house3" class="ms-5 rounded-circle img-fluid">
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                                
+                                                <div class="col-8 text-end pb-3">
+                                                    <input type="file"  accept="Image/*"  name="pic3" class="pic3 form-control file-upload-image border border-white" >
+                                                </div>
+                                                <div class="col-3  pb-3">
+                                                    <img  src="/homes/<%= profile[i].pic3 %>" alt="house3" class="ms-5 rounded-circle img-fluid">
+                                                </div>
+                                                <div class="col-12">  
+                                                </div>
+                                              
+                                                <div class="col-8 text-end pb-3">
+                                                    <input type="file"  accept="Image/*"  name="pic4" class="pic4 form-control file-upload-image border border-white"  >
+                                                </div>
+                                                <div class="col-3  pb-3">
+                                                    <img  src="/homes/<%= profile[i].pic4 %>" alt="house3" class="ms-5 rounded-circle img-fluid">
+                                                </div>
+                                                <div class="col-12">  
+                                                </div> 
+                                            
+                                                <%if(profile[i].Rented === 'true'){%>
+                                                <div class="form-check mb-2">
+                                                    <input class="Rented form-check-input" name="Rented"  type="checkbox" value="" checked>
+                                                    <%if(profile[i].type === 'rent'){%>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                    &nbsp; Rented
+                                                    </label>
+                                                    <%} else{%>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                    &nbsp; Sold
+                                                    </label>
+                                                    <%}%>
+                                                   
+                                                </div>
+                                                <%} else{%>
+                                                    <div class="form-check mb-2">
+                                                    <input class="Rented form-check-input" name="Rented"  type="checkbox" value="" >
+                                                    <%if(profile[i].type === 'rent'){%>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                    &nbsp; Rented
+                                                    </label>
+                                                    <%} else{%>
+                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                    &nbsp; Sold
+                                                    </label>
+                                                    <%}%>
+                                                   
+                                                </div>
+                                                <%}%>
+                                                <div class="col-4 pb-3">
+                                                    <input type="text" value="<%=profile[i].uid %>" name="uid"  class="form-control border-primary" hidden>
+                                                </div>
+                                                <input type="text" value="" name="Pic1"  class="Pic1 form-control border-primary" hidden>
+                                                <input type="text" value="" name="Pic2"  class="Pic2 form-control border-primary" hidden>
+                                                <input type="text" value="" name="Pic3"  class="Pic3 form-control border-primary" hidden>
+                                                <input type="text" value="" name="Pic4"  class="Pic4 form-control border-primary" hidden>
+                                                <div class=" col-4 text-start">
+                                                    <button type="submit" class="form-control file-upload-image btn btn-outline-danger"> delete</button>
+                                                </div>
+                                                
+                                                <div class=" col-4 text-end">
+                                                    <button class="btn btn-outline-primary" type="submit"> edit</button>
+                                                </div> 
+                                             
+                                            </div> 
+                                            </form>
+                                               
+                                        </div>
+
+
+        </div>
+    </div>
+    
+    <%}%>    
+                <%} else {%>
+                    <p class="text-center pb-3 fw-bolder">
+                        No Previous posts
+                    </p>
+                    <a href="/rental_form"> to post house</a>
+                <% } %>      
+        
+</div>
+
+
+
+
+
+<%- include('./partials/foot.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">     
+    </script>
+    <script>
+    
+    const prev_form = document.querySelector('form.prev_post');
+const Rented_ = document.querySelector('.Rented');
+const pic1_ = document.querySelectorAll('.pic1');
+const pic2_ = document.querySelectorAll('.pic2');
+const pic3_ = document.querySelectorAll('.pic3');
+const pic4_ = document.querySelectorAll('.pic4');
+
+const Pic1_ = document.querySelectorAll('.Pic1');
+const Pic2_ = document.querySelectorAll('.Pic2');
+const Pic3_ = document.querySelectorAll('.Pic3');
+const Pic4_ = document.querySelectorAll('.Pic4');
+
+
+let Rented = prev_form.Rented;
+
+    function validation(i){
+        // console.log(Pic1_[i].name, i)
+        if(Rented_.checked ){
+        Rented.value = 'true';
+            } 
+
+            if(pic1_[i].value === ''){
+                Pic1_[i].value = '';
+            }
+            else{
+                Pic1_[i].value = pic1_[i].value;
+            }
+
+            if(pic2_[i].value === ''){
+                Pic2_[i].value = '';
+            }
+            else{
+                Pic2_[i].value = pic2_[i].value;
+            }
+            if(pic3_[i].value === ''){
+                Pic3_[i].value = '';
+            }
+            else{
+                Pic3_[i].value = pic3_[i].value;
+            }
+            if(pic4_[i].value === ''){
+                Pic4_[i].value = '';
+            }
+            else{
+                Pic4_[i].value = pic4_[i].value;
+            }    
+    }
+
+
+
+
+
+</script>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
+</html>

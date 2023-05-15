@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <div>
+      <%- include('./partials/nav.ejs') %>
+        <hr class="hr" />
+        <div class="row gap-0">
+            <div class="col-xl-12 overflow-auto">
+                <div class="row m-1 gap-4">
+                  <% if(rental.length > 0) { 
+                    let size = rental.length;
+                   for(let i=0 ; i< size ; i++)
+                   {
+                    let id = rental[i].id;
+                    let fronthome = rental[i].pic1;
+                    let price = rental[i].price;
+                    let bedroom = rental[i].bedroom;
+                    let bathroom = rental[i].bathroom;
+                    let sqrt = rental[i].sqrt;
+                    let additionalfeature = rental[i].additionalfeature;
+                    %>
+                    <div class="card "  style="width: 18rem;">
+                      <form action="/<%= id %>" method="post">
+                        <div class="form-check ">
+                          <input class="form-check-input" type="checkbox" value="<%= id%>" id="<%= id%>" />
+                          <label class="form-check-label text-primary mx-2 fw-bold" for="<%= id%>">compare</label>
+                        </div>
+                      </form>
+                     
+                      <img class="card-img-top position-relative" src="/homes/<%=fronthome%>" alt="Card image cap">
+                    
+                      <div class="card-body text-center">
+                        <h5 class="card-title"><%= price %> ETB/Month</h5>
+                        <p class="card-subtitle "><%= bedroom %>|bd <%= bathroom %>|ba <%= sqrt %>sqrt-Home for rent </p>
+                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        <form action="/individual_house/<%= id %>" method="post">
+                          <% if(user){%>
+                          <input type="text" hidden name="uid" value="<%= user.id%>">
+                          <% }else{
+                            <!-- user.id = null; -->
+                            %>
+                               
+                            <input type="text" hidden name="uid" >
+                            <%}%>
+                          <button type="submit" class="btn btn-primary"> View House</button>
+                        </form>
+                        <!-- <a href="/individual_house/<%= id %>" class="btn btn-primary">View House</a> -->
+                      </div>
+                    </div> 
+                    
+                    
+                    <%} } else {  %>
+                      <p class="text-center"> No fovourite added yet </p>
+                      <% }%>
+                      <div class="container">
+                        <div class="text-end">
+                          <form method="post" action="/compare_homes" onclick="send_Array_Data()" name="compare_form" class="compare_form">
+                            <% 
+                            for(let i = 0 ; i< rental.length ; i++){
+                            %>
+                            <input class="form-check-input-compare" name="form_check_input_compare" value="<%= rental.id  %>" hidden/>
+                            <%}%>
+                            <button class="btn btn-outline-primary"> compare</button>
+                          </form>
+                        </div>
+                      </div>
+                      <hr class="hr" />
+                     
+                      <%- include('./partials/foot.ejs') %>
+                </div> 
+            </div>
+        </div>
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
+    <script>
+      let check_value = document.querySelectorAll('.form-check-input');
+      let sub_button = document.querySelector('form.compare_form');
+      let hidden_value = document.querySelectorAll('.form-check-input-compare');
+      hidden_value = sub_button;
+     
+      function send_Array_Data(){
+        try{
+          let hidden_length = hidden_value.length;
+        for(let i=0 ; i<hidden_length ; i++){
+          if(check_value[i].checked){
+          //  let hidden = sub_button.form-check-input-compare+`${i}`.value ;
+             hidden_value[i].value = check_value[i].value 
+            console.log(hidden_value[i].value)
+                                    }
+                                           }
+        }
+        catch(e){
+          console.log(e);
+        }
+       
+      }
+
+      // sub_button.addEventListener('submit', async (e)=>{
+      //   e.preventDefault();
+      //   let hidden_length = hidden_value.length;
+      //   for(let i=0 ; i<hidden_length ; i++){
+        
+      //     if(check_value[i].checked){
+      //       hidden_value[i].value = check_value[i].value 
+      //       console.log(`${i}`+'  '+ hidden_value[i].value)
+      //                               }
+      //                                      }
+       
+      // })
+     
+    </script>
+  </body>
+</html>

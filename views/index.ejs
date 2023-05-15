@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html class="no-js"> 
+   <%- include('./partials/head.ejs') %>
+   <body>
+       <div id="fh5co-wrapper">
+       <div id="fh5co-page">
+
+           <%- include('./partials/nav.ejs') %>
+
+       <!-- end:header-top -->
+
+       <aside id="fh5co-hero" class="js-fullheight animate-box">
+           <div class="flexslider js-fullheight">
+               <ul class="slides">
+                   <%for(let i =0; i< popular_houses.length ; i++){%>
+                  <li style="background-image: url(/homes/<%=popular_houses[i].pic1%>);">
+                      <div class="container-fluid">
+                          <div class="row">
+                              <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
+                                  <div class="slider-text-inner">
+                                      <div class="desc">
+                                          <span class="status"><%= popular_houses[i].type  %></span>
+                                          <h1>New House in Ethiopia, Bahir Dar</h1>
+                                           <h2 class="price"><%= popular_houses[i].price%>ETB/ Month</h2>
+                                           <p><%=popular_houses[i].additionalfeature%></p>
+                                           <p class="details">
+                                               <span><%=popular_houses[i].sqrt%> ft sq</span>
+                                               <span><%=popular_houses[i].bedroom%> Bedrooms</span>
+                                               <span><%=popular_houses[i].bathroom%> Bathrooms</span>
+                                               <span><%=popular_houses[i].bedroom + popular_houses[i].bedroom%> Total room</span>
+                                           </p>
+                                           <form action="/individual_house/<%= popular_houses[i]._id %>"  method="post">
+                                            <button class="btn btn-primary btn-lg">View Homes</button>
+                                        </form>
+                                           
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+               <% } %>
+                      
+                 </ul>
+             </div>
+            
+       </aside>
+       
+       <div id="fh5co-search-map">
+        <div class="search-property">
+            <div class="s-holder " >
+                <h2>Search Properties</h2>
+                <form action="/filter_index" method="get">
+                    <div class="row">
+                        <div class="col-xxs-12 col-xs- animate-box">
+                            <div class="input-field">
+                                <label for="from">Location:</label>
+                                <input type="text" value="any" name="location" class="form-control" id="from-place" placeholder="Any" />
+                            </div>
+                        </div>
+                        <div class="col-xxs-12 col-xs-12">
+							<section>
+								<label for="class">Property Status:</label>
+								<select name="type" id="type" class="cs-select cs-skin-border animate-box">
+									<option value="any"  selected>Any</option>
+									<option value="rent">Rent</option>
+									<option value="sell">Sale</option>
+								</select>
+							</section>
+						</div>
+                        <div class="col-xxs-12 col-xs-12 ">
+                            <section>
+                                <label for="class">Price:</label>
+                                <div class="wide">
+                                    <select name="price_min" id="price_min" class="cs-select cs-select-half cs-skin-border input-half">
+                                        <option  value="any" >Any</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1500">1500</option>
+                                        <option value="2000">2000</option>
+                                        <option value="4000">4000</option>
+                                        <option value="8000">8000</option>
+                                        <option value="16000">16000</option>
+                                        <option value="32000">32000</option>
+                                        <option value="64000">64000</option>
+                                        <option value="120000">120000</option>
+                                        
+                                    </select>
+                                    <select name="price_max" id="price_max" class="cs-select cs-select-half cs-skin-border input-half" >
+                                        <option  value="any">Any</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1500">1500</option>
+                                        <option value="2000">2000</option>
+                                        <option value="4000">4000</option>
+                                        <option value="8000">8000</option>
+                                        <option value="16000">16000</option>
+                                        <option value="32000">32000</option>
+                                        <option value="64000">64000</option>
+                                        <option value="120000">120000</option>
+                                       
+                                    </select>
+                                    
+                                   
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-xxs-12 col-xs-12 ">
+                            <section>
+                                <label for="class">Bedrooms:</label>
+                                <div class="wide">
+                                    <select  name="bedroom_min" id="bedroom_min" class="cs-select cs-select-half cs-skin-border input-half" >
+                                        <option value="any" >Any</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                    <select name="bedroom_max" id="bedroom_max" class="cs-select cs-select-half cs-skin-border input-half" >
+                                        <option  value="any" >Any</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-xxs-12 col-xs-12 animate-box">
+                            <section>
+                                <label for="class">Bathrooms:</label>
+                                <div class="wide">
+                                    <select name="bathroom_min" id="bathroom_min" class="cs-select cs-select-half cs-skin-border input-half" >
+                                        <option  value="any" >Any</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                    <select  name="bathroom_max" id="bathroom_max" class="cs-select cs-select-half cs-skin-border input-half" >
+                                        <option value="any">Any</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </div>
+                            </section>
+                        </div>
+                
+                
+                    
+                    <div class="col-xxs-12 col-xs-12 text-center animate-box">
+                        <button class="btn btn-primary btn-lg" style="width: 100%;">Apply</button>
+                        
+                    </div>
+                </form>
+                </div>
+
+
+            </div>
+        </div>
+         <div class="map animate-box" style="background-image: url(/1.jpg);"></div>
+            
+       
+       
+    </div>
+
+
+       <div id="fh5co-popular-properties" class="fh5co-section-gray">
+           <div class="container">
+               <div class="row">
+                   <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                       <h3>Popular Properties</h3>
+                       <p>the condition of being right, appropriate, or fitting:
+                   </div>
+               </div>
+                <% for(let i =0; i< popular_houses.length ; i++){ %>
+                   <div class="col-md-4 animate-box">
+                       <a href="#" class="fh5co-property" style="background-image: url(/homes/<%=popular_houses[i].pic1%>);">
+                           <span class="status">Rent</span>
+                           <div class="prop-details">
+                               <span class="price"><%=popular_houses[i].price  %></span>
+                               <h3><%= popular_houses[i].additionalfeature  %></h3>
+                           </div>
+                       </a>
+                   </div>
+                  <% } %> 
+                   
+               </div>
+           </div>
+       </div>
+
+       <div id="fh5co-testimonial" style="background-image:url(images/img_bg_2.jpg);">
+           <div class="container">
+               <div class="row animate-box">
+                   <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                       <h2>Happy Clients</h2>
+                   </div>
+               </div>
+               <div class="row">
+                   <div class="col-md-4">
+                       <div class="box-testimony animate-box">
+                           <blockquote>
+                               <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+                               <p>&ldquo;I am happy to use the systems. His counsel was living outside the Canada city. But I was arranged for me when I turned to the sea. He was hard to find a home to live. Because I am new to the city, I am happy to receive a house in this system of things.&rdquo;</p>
+                           </blockquote>
+                           <p class="author">Paulos asress</p>
+                       </div>
+                       
+                   </div>
+                   <div class="col-md-4">
+                       <div class="box-testimony animate-box">
+                           <blockquote>
+                               <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+                               <p>&ldquo;I live home in the city of bahir dar. But many times, there was a need for a tenant to rent my second house. The advice may not be alarm on the basis for the notice or disorders for the advice of another tenant. But after I started to use this session, she has poured out this.&rdquo;</p>
+                           </blockquote>
+                           <p class="author">Robel Asfaw</p>
+                       </div>
+                       
+                       
+                   </div>
+                   <div class="col-md-4">
+                       <div class="box-testimony animate-box">
+                           <blockquote>
+                               <span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+                               <p>&ldquo;I was disabled. It was hard for me to find a house in the sea. But after I began to use this system, I have rejected the free home I wanted. Indeed, the passing of this sleepency is kind of love. And I love you to say to my door.&rdquo;</p>
+                           </blockquote>
+                           <p class="author">Kassie Liyih</p>
+                       </div>
+                       
+                   </div>
+               </div>
+           </div>
+       </div>
+
+     
+       <%- include('./partials/foot.ejs') %>
+       
+
+   
+
+   </div>
+   <!-- END fh5co-page -->
+
+   </div>
+   <!-- END fh5co-wrapper -->
+
+   <!-- jQuery -->
+
+
+   <script src="js/jquery.min.js"></script>
+   <!-- jQuery Easing -->
+   <script src="js/jquery.easing.1.3.js"></script>
+   <!-- Bootstrap -->
+   <script src="js/bootstrap.min.js"></script>
+   <!-- Waypoints -->
+   <script src="js/jquery.waypoints.min.js"></script>
+   <script src="js/sticky.js"></script>
+   <!-- Superfish -->
+   <script src="js/hoverIntent.js"></script>
+   <script src="js/superfish.js"></script>
+   <!-- Flexslider -->
+   <script src="js/jquery.flexslider-min.js"></script>
+   <!-- Date Picker -->
+   <script src="js/bootstrap-datepicker.min.js"></script>
+   <!-- CS Select -->
+   <script src="js/classie.js"></script>
+   <script src="js/selectFx.js"></script>
+
+   
+   <!-- Main JS -->
+   <script src="js/main.js"></script>
+
+   </body>
+</html>
+
